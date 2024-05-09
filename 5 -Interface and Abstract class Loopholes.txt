@@ -1,0 +1,378 @@
+Interface and Abstract class Loopholes -
+
+		
+	1) new VS constructor -
+		
+		1) new operator  -
+				1) the main objective of new operator is to create a object 
+				
+		2) constructor -
+				1) the main purpose of constructor is initiliaze object
+				
+		3) the first object will be create by using new operator and then initiliazation will be performed by constructor 
+		
+			
+			class Student
+			{
+				String name;
+				int rollno;
+				
+				Student(String name, int rollno)			// constructor
+				{
+					this.name = name;
+					this.rollno = rollno;
+				}
+			}
+			
+			
+						to initiliaze object
+									|
+			Student s = new Student("Durga", 101);
+						 |
+					responsible to create object
+					
+			output -
+					1) name : null, rollno : 0				// new operator
+					2) name : Durga, rollno : 101			// Student("Durga", 101);
+					
+					
+		4) before constructor only object is ready and hence within the constructor we can access object properties like HashCode
+		
+				class Test
+				{
+					Test()
+					{
+						System.out.println(this);					//Test@6a3d60
+						System.out.println(this.hashCode());		// 7224672
+					}
+					
+					public static void main(String[] args)
+					{
+						Test t = new Test();
+					}
+				}
+				
+				
+				
+				
+				
+	2) Child Object VS Parent constructor -
+
+		1) whenever we are creating child class object automatically parent constructor will be executed to perform initiliazation for the instance variables which are
+			inheriting from parent
+			
+			
+						class Person
+						{
+							String name;
+							int age;
+							100 properties ;	
+							
+							Person(String name, int age)
+							{
+								this.name = name;
+								this.age = age;							// this constructor will work for every child object initialization
+							}
+						}
+						
+						class Student extends Person
+						{
+							int rollno;
+							int marks;
+							
+							Student(String name, int age,int rollno,int marks)
+							{
+								super(name, age);
+								this.rollno = rollno;
+								this.marks = marks;
+							}
+						}
+						
+						Student s = new Student("durga", 23,101,90);
+						
+						name : durga
+						age : 23		-- this initialization performed by parent constructor
+						
+						rollno : 101
+						marks : 90		--	this initialization performed by child constructor
+						
+				
+		2) in the above program both parent and child constructor executed for child object initialization only		
+				
+				
+				
+				
+				
+				
+	2) Child Object VS Parent constructor -
+
+			1) whenever we are creating child class object parent constructor will be executed but parent object wont be created 
+				
+				
+					class P
+					{
+						P()
+						{
+							System.out.println(this.hashCode());		//100
+						}
+					}
+					
+					class C extends P
+					{
+						C()
+						{
+							System.out.println(this.hashCode());		//100
+						}
+					}
+					
+					class Test
+					{
+						public static void main(String[]args)
+						{
+							C c =new C();
+							System.out.println(c.hashCode());			//100
+						}
+					}
+					
+			2) in the above example we just created only chil class object but both parent and child constructor executed for that child object
+			
+			
+			
+			
+			
+			
+	3) need of abstract class constructor -
+	
+		1) In way we cant create object for abstract class either directly or in-directly, but abstract class can contain constructor what is the need
+			
+		2) the main objective for abstract class constructor is to perform initialization for the instance variables which are inheriting from abstract class to the child class
+		
+		3) whenever we are creating child class object automatically abstract class constructor will be executed to perform initialization for the instance variables which 
+			are inheriting from abstract class (code reusability)
+		
+		
+		A) Approach 1 - without having constructor in abstract class
+			
+						abstract class Person
+						{
+							String name;
+							int age;
+							100 properties ;	
+						}
+						
+						class Student extends Person
+						{
+							int rollno;
+							
+							Student(String name, int age, 101 properties)
+							{
+								this.name = name;
+								this.age = age;
+								100 properties
+								this.rollno = rollno;
+							}
+						}
+						
+						Student s = new Student(101 properties);
+
+						
+						class Teacher extends Person
+						{
+							String subject;
+							
+							Teacher(String name, int age, 101 properties)
+							{
+								this.name = name;
+								this.age = age;
+								100 properties
+								this.subject = subject;
+							}
+						}
+						
+						Teacher t = new Teacher(101 properties);
+
+
+						Note - more code, code redundency
+						
+						
+						
+						
+			A) Approach 1 - with constructor inside abstract class
+					
+					
+						abstract class Person
+						{
+							String name;
+							int age;
+							100 properties ;	
+							
+							Person(String name, int age, 100 properties)
+							{
+								this.name = name;
+								this.age = age;							// this constructor will work for every child object initialization
+								100 properties
+							}
+						}
+						
+						class Student extends Person
+						{
+							int rollno;
+							
+							Student(String name, int age, 101 properties)
+							{
+								super(100 properties);
+								this.rollno = rollno;
+							}
+						}
+						
+						Student s = new Student(101 properties);
+
+						
+						class Teacher extends Person
+						{
+							String subject;
+							
+							Teacher(String name, int age, 101 properties)
+							{
+								super(100 properties);
+								this.subject = subject;
+							}
+						}
+						
+						Teacher t = new Teacher(101 properties);
+
+
+						Note - less code, code reusability
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+	4) abstract class VS interface wrt constructor
+		
+		Q . anyway we cannot create object for abstract class and interface but abstract class can contain constructor but interface does not. why ?
+		
+		1) the main purpose of constructor is to perform initialization of an object that is to perform initialization for instance variables 
+		2) abstract class can contain instance variables which are required for child class object to perform initialization for these instance variables constructor concept
+			is required for abstract classes 
+		3) every variables present inside interface public static first weather we are declaring or not hence there is no chance of existing instance variables inside interface
+			because of these constructor concept not required for interfaces 
+		
+		
+		
+		
+		
+		
+	5) abstract Vs Interface
+
+		Q inside interface we can take only abstract methods but in abstract class also we can take only abstract methods based on our requirement. then what is the need if 
+			interface ? i.e it is  possible to replace interface with abstract class ?
+		 
+		 1) if everything is abstract highly recommented to go for interface but not abstract class
+		 2) we can replace interface with abstract class but it is not good programming pratice 
+		 3) this is something like recruiting IAS officer to swaping purpose
+		 
+		 
+				interface X 
+				{
+					
+				}
+						
+						
+				
+		
+				abstract class X 
+				{
+					
+				}
+				
+			1) while implementing interface we can extends any other class and hence we wont miss inheritance benefits		
+				
+		
+				class Test extends A implements X
+				{
+				
+				}
+				
+			1) while extending abstract class we cant extend any other class and hence we are missing inheritance benefits
+				class Test extends A, X
+				{
+				
+				}
+				
+			2) in this case object creation is not costly 
+				
+				class Test implements X
+				{
+					Test t = new Test();			// 2 minutes 
+				}
+				
+				
+			2) in this case object creation is costly 
+				
+				class Test extends X
+				{
+					Test t = new Test();			// 20 minutes 
+				}	
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+Interface, abstract class and constructor -
+	
+	1) The purpose of constructor is to create an object
+		no
+		
+	2) The purpose of constructor is to initialization an object but not to create object
+		yes
+		
+	3) once constructor completes then only xx	object creation completes
+		no
+		
+	4) first object will be created and then constructor will be executed
+		yes
+		
+	5) the purpose of new keyword is to create an object and the purpose of constructor is to initialization that object
+		yes
+		
+	6) we cant create object of abstract class directly but in-directly we can create
+		no
+		
+	7) whenever we are creating child class object automatically parent class object will be created internally
+		no
+		
+	8) whenever we are creating child class object automatically abstract class constructor will be executed
+		yes
+		
+	9) whenever we are creating child class object automatically parent object will be created 
+		no
+		
+	10) whenever we are creating child class object automatically parent constructor will be executed but parent object wont be created
+		yes
+		
+	11) Either directly or in-directly we cant create object for abstract class and hence constructor concept is not applicable for abstract class
+		no
+		
+	12) interface can contain constructor
+		no
+		
+		
+		
