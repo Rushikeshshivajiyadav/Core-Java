@@ -1,0 +1,1224 @@
+Flow Control  -
+
+			
+			1) flow control describe the order in which the statement will be executed at runtime
+			
+																
+																Flow-Control
+																
+																
+					1) Selection Statement						2) Iterative Statement										3) Transfer statement
+							|											|															|
+						1) if-else									1) while()													1) break
+						2) switch()									2) do-while()												2) continue
+																	3) for()													3) return
+																	4) for-each loop(1.5 version)								4) try - catch - finally
+																																5) assert(1.4 version)
+																																
+																																
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1) Selection Statement  -
+
+		1) if-else	 -
+			
+			1) syntax  -
+					
+					if(b)				// should be boolean type
+					{
+						Action if b is true
+					}
+					else
+					{
+						Action if b is false
+					}
+					
+					
+			2) the argument to the if statement should be boolean type by mistake if you are trying to provide any other type then we will get compile time error   
+			
+				1) 
+					
+					int x = 20;
+					if(x)										// CE : incompatable type found : int  required : boolean
+					{
+						System.out.println("Hello");
+					}
+					else
+					{
+						System.out.println("Hi");
+					}
+					
+					
+				
+				2) 
+					
+					int x = 10;
+					if(x = 20)										// CE : incompatable type found : int  required : boolean
+					{
+						System.out.println("Hello");
+					}
+					else
+					{
+						System.out.println("Hi");
+					}
+					
+					
+					
+					
+				3) 
+					
+					int x = 10;
+					if(x == 20)										
+					{
+						System.out.println("Hello");
+					}
+					else
+					{
+						System.out.println("Hi");					// Hi
+					}
+					
+					
+					
+					
+				4) 
+					
+					boolean b = true;
+					if(b = false)										
+					{
+						System.out.println("Hello");
+					}
+					else
+					{
+						System.out.println("Hi");					// Hi
+					}
+					
+					
+					
+				
+				5) 
+					
+					boolean b = false;
+					if(b == false)										
+					{
+						System.out.println("Hello");				// Hello
+					}
+					else
+					{
+						System.out.println("Hi");					
+					}
+					
+					
+			3) else part and {} braces are optional. without {} braces only one statement is allowed under if we should not be declarative statement
+					
+					if(true)
+						System.out.println("Hello");				// valid
+						
+						
+					
+					if(true);										// valid
+					
+					
+					
+					if(true)
+						int x = 10;									//  should not be declarative statement
+						
+						
+					if(true)
+					{
+						int x = 10;									// valid
+					}
+					
+			
+			4) ; is valid statement which is also know as empty statement
+			
+			
+			
+			Note - 1) there is dyngalling problems in java 
+				   2) every else is mapped to the nearest if statement
+				   
+				   
+				   
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2) switch()	 -
+		
+		1) if serveral options are available then it is not recommeded to use nested if-else because it reduces readability to handle this requirement we should go for 
+			switch statement
+			
+				syntax -
+						
+						switch(x)
+						{
+							case 1:
+									Action 1;
+									break;
+							case 2:
+									Action 2;
+									break;
+							case n:
+									Action n;
+									break;
+									
+							default :
+									default Action;
+							
+						}
+						
+		2) type -				
+			1) the allowed argument types are byte, short, char, int until 1.4 version 
+			2)but 1.5 version onwards corresponding wrapper classes and enum type also allowed			
+			3) from 1.7 version onwards String type also allowed
+
+						
+						1.4 version				1.5 version			1.7 version
+						
+						byte					Byte
+						short					Short
+						char					Character				String
+						int						Integer
+												   +
+												enum
+							
+							
+						
+						
+						
+		2) {} braces are mandatory except switch every where {} braces are optional
+				
+		3) both case and default are optional that is empty switch statement is valid java syntax
+				
+				int x =10;
+				switch(x)
+				{
+				
+				}
+				
+				
+		4) inside switch every statement should be under some case or default that is independent statement are not allowed inside switch otherwise we will get compile
+			time error
+				
+				int x =10;
+				switch(x)
+				{
+					System.out.println("Hello");			// CE : case, default or } expected
+				}
+				
+						
+		5) every case label should be constant (that is constant expression)
+				
+				int x = 10;
+				int y = 20;
+				
+				switch(x)
+				{
+					case 10:
+							System.out.println(10);
+							break;
+							
+					case y:											// CE : constant expression required
+							System.out.println(20);
+							break;
+				}
+						
+						
+			Note -
+				if we declare y as final then we wont get any compile time error
+				
+		
+		6) both switch argument and case label can be expressions but case label should be constant expression
+				
+				int x = 10;
+				switch(x + 1)							// int 
+				{
+					case 10:
+							System.out.println(10);
+							break;
+							
+					case 10 + 20 + 30:
+							System.out.println(10);
+							
+				}
+						
+						
+		7) every case label should be in the range of switch argument type otherwise we will get compile time error
+				
+				byte b = 10;
+				
+				switch(b)											// byte
+				{
+					case 10:
+							System.out.println(10);
+							break;
+					case 100:
+							System.out.println(100);
+							break;
+					case 1000:
+							System.out.println(1000);				// CE : possible loss of precision found : int required : byte
+							break;
+				}
+				
+				
+				
+				
+				
+				byte b = 10;
+				
+				switch(b + 1)											// int
+				{
+					case 10:
+							System.out.println(10);
+							break;
+					case 100:
+							System.out.println(100);
+							break;
+					case 1000:
+							System.out.println(1000);			
+							break;
+				}
+					
+					
+					
+		8) duplicates case labels are not allowed otherwise we will get compile time error
+		
+				int x = 10;
+				
+				switch(x)											// byte
+				{
+					case 97:
+							System.out.println(97);
+							break;
+					case 98:
+							System.out.println(97);
+							break;
+					case 99:
+							System.out.println(98);				
+							break;
+					case 'a':
+							System.out.println('a');				// CE : duplicate case label
+							break;
+				}
+				
+				
+				
+		Note  -
+				case label  -
+						1) it should be constant expression
+						2) the value should be in the range of switch argument type
+						3) duplicates case labels are not allowed
+		
+
+		--------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+	fall-through inside switch  -
+		
+		1) within the switch if any case is matched from that case onwards all statement will be executed until break or end of the switch this is called fall-through 
+			inside the switch
+			
+		2) the main advantage of fall-through switch is we can define common action for multiple cases (code reusability)
+		
+				switch(x)
+				{
+					case 1:
+					case 2:
+					case 3:
+							System.out.println("Q4");
+							break;
+					case 4:
+					case 5:
+					case 6:
+							System.out.println("Q1");
+							break;
+				}
+				
+				
+			Example -
+				
+				switch(x)
+				{
+					case 0:
+							System.out.println(0);
+					case 1:
+							System.out.println(1);
+							break;
+					case 2:
+							System.out.println(2);
+							
+					default:
+							System.out.println("Def");
+				}
+				
+				
+				output -
+					x = 0			x = 1 		x = 2 		x = 3
+					0				1			2			Def
+					1							Def
+					
+					
+	
+	default case  -
+			
+			1) within the switch we can take default case almost once
+			2) default case will be executed if and only if there is no case matched 
+			3) within the switch we can write default case anywhere but it is recommeded to write has last case 
+					
+					
+			Example -
+				
+				switch(x)
+				{
+					default:
+							System.out.println("Def");
+							
+					case 0:
+							System.out.println(0);
+							break;
+					case 1:
+							System.out.println(1);
+							
+					case 2:
+							System.out.println(2);
+							
+				}
+				
+				
+				output -
+					x = 0			x = 1 		x = 2 		x = 3
+					0				1			2				Def
+									2							0
+					
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2) Iterative Statement	 -
+
+		1) while()  -
+			
+				1) if we dont know number of iterations in advance we should go for while loop
+					eg -
+						while(rs.next())
+						{
+						}
+						
+						while(e.hasMoreElements())
+						{
+						}
+						
+						while(itr.hasNext())
+						{
+						}
+						
+						
+			syntax -
+					while(b)					// should be boolean type
+					{
+						action
+					}
+					
+			1) the argument should be boolean type if we are trying to provide any other type then we will get compile time error
+			
+			
+					while(1)					// CE : incompatable type  found : int  required : boolean
+					{
+						System.out.println("Hello");
+					}
+					
+			2) curly braces are optional and without curly braces we can take only one statement under while which should not be declarative statement
+			
+					which(true)						// valid
+						System.out.println("Hello");
+						
+					
+					which(true)						// valid
+					
+					
+					which(true)						// invalid
+						int x = 10;
+						
+						
+					while(true)						// valid
+					{
+						int x = 10;
+					}
+					
+			
+
+loopholes -
+		
+					while(true)							
+					{
+						System.out.println("Hello");
+					}
+					System.out.println("Hi");			// invalid -  CE : unreacheable statement
+					
+					
+					
+					while(false)							
+					{
+						System.out.println("Hello");			// invalid -  CE : unreacheable statement
+					}
+					System.out.println("Hi");	
+
+
+						
+					int a = 10, b = 20;
+					while(a < b)							
+					{
+						System.out.println("Hello");
+					}
+					System.out.println("Hi");			
+					
+					output - 
+							Hello - infinite time
+							
+							
+					
+					int a = 10, b = 20;
+					while(a > b)							
+					{
+						System.out.println("Hello");
+					}
+					System.out.println("Hi");			
+					
+					output - 
+							Hi
+							
+							
+							
+					
+					final int a = 10, b = 20;
+					while(a < b)						// true  - // invalid -  CE : unreacheable statement				
+					{
+						System.out.println("Hello");
+					}
+					System.out.println("Hi");			
+					
+					
+					
+					
+					final int a = 10, b = 20;
+					while(a > b)						// false  - // invalid -  CE : unreacheable statement				
+					{
+						System.out.println("Hello");
+					}
+					System.out.println("Hi");	
+
+
+
+		Note -
+			1) every final variable will be replaced by the value at compile time only
+				
+					final int a = 10;
+					int  b = 20;
+					
+					// after compilation
+					System.out.println(a);				//  System.out.println(10);	
+					System.out.println(b); 				//  System.out.println(b);	
+					
+			
+			2) if every argument is final variable (compile time constant) then that operation should be performed at compile time only
+					
+					final int a = 10, b = 20;
+					int c = 30;
+					
+					// after compilation
+					System.out.println(a + b);				//  System.out.println(30);	
+					System.out.println(a + c);				//  System.out.println(10 + c);	
+					System.out.println(a < b);				//  System.out.println(true);	
+					System.out.println(a > c);				//  System.out.println(10 < c);
+					
+					
+					
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+do-while loop  -
+		
+		1) if we want to execute loop body at least once then we should go for do-while
+		
+			syntax -
+					do
+					{
+						// body
+					}while(b);			// should be boolean type and ; is mandatory
+					
+					
+					
+		2) curly braces are optional and without curly braces we can take only one statement between do or while which should not be declarative statement
+				
+				do 
+					System.out.println("Hello");
+				while(true);
+				
+				
+				do ;
+				while(true);
+				
+				
+				do 
+					int a = 10;				// invalid - declarative statement
+				while(true);
+				
+				
+				do 
+				{
+					int a = 10;	
+				}
+				while(true);
+				
+				
+				do 
+				while(true);				// invalid - no body
+				
+				
+				
+		3)		do while(true)
+					System.out.println("Hello");
+				while(false)
+				
+					- > 
+						do 
+							while(true)
+								System.out.println("Hello");
+								
+						while(false);
+						
+						
+						output -
+								Hello
+								infinite
+								
+								
+								
+		4) 	
+				do 
+				{
+					System.out.println("Hello");
+				}
+				while(true);
+				System.out.println("Hi");				// unreacheable statement
+				
+				
+				
+				do 
+				{
+					System.out.println("Hello");
+				}
+				while(false);
+				System.out.println("Hi");				
+				
+				output -
+						Hello
+						Hi
+						
+						
+				
+				int a = 10, b = 20;
+				do 
+				{
+					System.out.println("Hello");
+				}
+				while(a < b);
+				System.out.println("Hi");				
+				
+				output -
+						Hello
+						infinite
+						
+						
+				
+				int a = 10, b = 20;
+				do 
+				{
+					System.out.println("Hello");
+				}
+				while(a > b);
+				System.out.println("Hi");				
+				
+				output -
+						Hello
+						Hi
+						
+						
+						
+				
+				final int a = 10, b = 20;
+				do 
+				{
+					System.out.println("Hello");
+				}
+				while(a < b);
+				System.out.println("Hi");				// unreacheable			
+				
+				
+				
+				
+				int a = 10, b = 20;
+				do 
+				{
+					System.out.println("Hello");
+				}
+				while(a > b);
+				System.out.println("Hi");				
+				
+				output -
+						Hello
+						Hi
+						
+						
+						
+						
+						
+						
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+for loop    -
+			
+		1) for loop is mostly commonly used loop in java 
+		2) if we know number of interation in advance then for loop is best choice
+		
+			syntax -
+			
+								1					2 5 8				4 7
+					for(initilization_Session; Conditional_check; increment-Decrement_session)
+					{
+						body		3 6 9
+					}
+					
+					
+		3) curly braces are optional and without curly braces we can take only one statement under for loop , which should not be declarative statement
+		
+				for(int i = 0; true; i++)
+					System.out.println("Hello");
+					
+					
+				for(int i = 0; i < 10; i++)
+					System.out.println("Hello");
+
+
+				for(int i = 0; true; i++)
+					int x = 10;							// invalid - declarative statement
+					
+					
+					
+		4) initilization_Session  -
+				
+				1) this part will be executed only once in loop life cycle
+				2) here we can declare and initilize local variables of for loop 
+				3) here we can declare any number of variables but should be of the same type by mistake if we are trying to declare different data types of variables then we
+					will get compile time error
+					
+					
+					int i = 0, j = 0;
+					
+					int i = 0, String s = "durga";				// invalid
+					
+					int i = 0, int  j = 0;						// invalid
+					
+				4) in the initilization_Session we can take any valid system including sop 
+					
+					int i = 0;
+					
+					for(System.out.println("Hello boss u r sleeping"); i < 3 ; i++)
+					{
+						System.out.println("no boss u only sleeping");
+					}
+					
+					output -
+						System.out.println("Hello boss u r sleeping");
+						System.out.println("no boss u only sleeping");
+						System.out.println("no boss u only sleeping");
+						System.out.println("no boss u only sleeping");
+					
+				
+		5) Conditional_check  -
+				
+				1) here we can take any valid java expression but should of the type of boolean 
+				2) this part is optional if we are not taking any thing then compiler will always place true
+				
+		
+		6) increment-Decrement_session  -
+				
+				1) in the increment-Decrement_session we can take any valid java statement including sop 
+					
+					int i = 0;
+					
+					for(System.out.println("Hello"); i < 3 ; System.out.println("Hi"))
+					{
+						i++; 
+					}
+					
+					
+					output 
+						Hello
+						Hi
+						Hi
+						Hi
+						
+						
+		7) all three parts of for loop are independent of each other and optional
+			
+				for( ; ; )
+				{
+					System.out.println("Hello");
+				}
+				
+				
+				for( ; ; );
+				
+				both are valid infinite loop
+				
+				
+		
+		
+loopholes   -
+			
+				for(int i = 0; true ; i++)
+				{
+					System.out.println("Hello");
+				}
+				System.out.println("Hi");			// unreacheable statement
+				
+				
+				
+				
+				for(int i = 0; false ; i++)
+				{
+					System.out.println("Hello");		// unreacheable statement
+				}
+				System.out.println("Hi");		
+
+
+
+				for(int i = 0;  ; i++)
+				{
+					System.out.println("Hello");		
+				}
+				System.out.println("Hi");			// unreacheable statement
+				
+				
+				
+				int i = 10, b = 20;
+				for(int i = 0; a < b ; i++)
+				{
+					System.out.println("Hello");		
+				}
+				System.out.println("Hi");			
+				
+				output -
+						Hello
+						infinite
+						
+				
+				
+				int i = 10, b = 20;
+				for(int i = 0; a > b ; i++)
+				{
+					System.out.println("Hello");		
+				}
+				System.out.println("Hi");			
+				
+				output -
+						Hi
+						
+						
+				
+				final int i = 10, b = 20;
+				for(int i = 0; a < b ; i++)
+				{
+					System.out.println("Hello");		
+				}
+				System.out.println("Hi");				// unreacheable statement	
+				
+				
+				
+				
+				final int i = 10, b = 20;
+				for(int i = 0; a > b ; i++)
+				{
+					System.out.println("Hello");			// unreacheable statement	
+				}
+				System.out.println("Hi");		
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+for-each loop  - (Enhanced for loop 1.5 version)  -
+					
+		1) introduced in 1.5 version 
+		2) it is specially designed loop to retrive elements of Arrays and Collections
+		
+		
+		Example -
+			1) to print elements of one-dimensional Arrays
+					
+					int[] x = {10, 20, 30 ,40 ,50};
+					
+					
+					normal for loop
+					
+						for(int i = 0; i < x.length; i++)
+						{
+							System.out.println(x[i]);
+						}
+					
+					
+					Enhanced for loop
+					
+						for(int x1 : x)
+						{
+							System.out.println(x1);
+						}
+				
+				
+			2) to print elements of two-dimensional Arrays
+					
+					int[][] x = {{10, 20, 30}, {40, 50}};
+					
+					
+					normal for loop  -
+					
+						for(int i = 0; i < x.length; i++)
+						{
+							for(int j = 0; j < x[i].length; j++)
+							{
+								System.out.println(x[i][j]);
+							}
+						}
+						
+					
+					Enhanced for loop
+					
+						for(int[]  x1 : x)
+						{
+							for(int x2 : x1)
+							{
+								System.out.println(x2);
+							}
+						}
+						
+						
+						
+						
+			
+			3) to print elements of two-dimensional Arrays
+			
+					Enhanced for loop
+					
+						for(int[][]  x1 : x)
+						{
+							for(int[] x2 : x1)
+							{
+								for(int x3 : x2)
+								{
+									System.out.println(x3);
+								}
+							}
+						}
+						
+						
+						
+						
+	Note -
+			1) for-each loop is best choice to retrive elements of Arrays and Collections but its limitation is it is applicable only for Arrays and Collections and it is a not
+				a general purpose loop
+				
+					for(int i = 0; i < 10; i++)
+					{
+						System.out.println("Hello");
+					}
+					
+			2) we cant write an equivalent for-each loop directly 
+			
+			3) by using normal for loop we can print elements Arrays either in original order or reverse order 
+			4) but by using for-each we can print Arrays elements only in original order but not in reverse order
+			
+					
+					int x[] = {10, 20, 30, 40, 50};
+					
+					for( int i = x.length-1; i >= 0; i--)
+					{
+						System.out.println(x[i]);
+					}
+					
+					output -
+						50
+						40
+						30
+						20
+						10
+						
+				we cant write an equivalent for-each loop directly
+				
+				
+				
+				
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Iterable(I)  -
+		
+		syntax -
+				
+				for(eachitem x : target)
+				{
+				
+				}
+				
+				target - is a Array / Collections and Iterable Object
+				
+				
+		1) the target elements in for-each loop should be Iterable Object
+		2) an Object is said to be Iterable if and only if corresponding class implements java.lang.Iterable interface
+		3) Iterable interface introduced in 1.5 version and it contains only one method 
+				
+				public Iterator iterator();
+				
+		4) all Array related classes and Collections implemented classes already implements Iterable interface being a programmer we are not required to do any thing just 
+			we should aware the point 
+			
+			
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Differences between Iterator and Iterable
+
+
+										Iterator																Iterable
+										
+				1) it is related to Collections											1) it is related to for-each loop
+				2) we can use to retrive elements of Collection one by one 				2) the target elements in for-each should be Iterable
+				3) present in java.util package											3) present in java.lang package
+				4) it contains three method												4) it contains only one method
+					hasNext(); next(); remove												iterator();
+		
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Transfer statement  -
+
+			
+		1) we can use break statement in the following places 
+				
+				1) inside switch the stop fall-through
+					
+					int x = 0;
+					switch(x)
+					{
+						case 0:
+								System.out.println(0);
+						
+						case 1:
+								System.out.println(1);
+								break;
+								
+						case 2:
+								System.out.println(2);
+								
+						default :
+								System.out.println("default");
+					}
+					
+					output -
+							0
+							1
+							
+					
+				
+				2) inside loops  - to break loop execution based on some condition
+				
+						for(int i = 0; i < 10; i++)
+						{
+							if(i == 5)
+								break;
+							
+							System.out.println(i);
+						}
+						
+						output -
+								0
+								1
+								2
+								3
+								4
+								
+					
+					
+				3) inside Labeled block  - to break block execution based on some condition
+					
+						class Test
+						{
+							public static void main(String[] args)
+							{
+								int x = 10;
+								
+								l1 :
+								{
+									System.out.println("begin");
+									if(x == 10)
+										break l1;
+									System.out.println("end");
+								}
+								System.out.println("Hello");
+							}
+						}
+						
+						output -
+								begin
+								Hello
+								
+	
+	Note - 
+			1) these are the only places where we can use break statement if we are using anywhere else we will get compile time error saying break outside switch or loop
+				
+					class Test
+						{
+							public static void main(String[] args)
+							{
+								int x = 10;
+								if(x == 10)
+									break;						// CE : break outside switch or loop
+								System.out.println("Hello");
+							}
+						}	
+						
+					
+						
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+continue statement  -
+							
+		1) we can use continue statement inside loops to skip current iteration and continue for the next iteration
+				
+				for( int i = 0; i < 10; i++)
+				{
+					if(i % 2 == 0)
+						continue
+					System.out.println(i);
+				}
+				
+				output -
+						1
+						3
+						5
+						7
+						9
+						
+						
+		2) we can use continue statement only inside loop if we are using anywhere else we will get compile time error saying continue outside of loop
+		
+						class Test
+						{
+							public static void main(String[] args)
+							{
+								int x = 10;
+								if(x == 10)
+									continue;						// CE : continue outside loop
+								System.out.println("Hello");
+							}
+						}	
+						
+						
+						
+						
+						
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Labeled break and continue   -
+	
+		1) we can use Labeled break and continue to break and continue a particular loop in nested loops 
+				
+				Labeled break and continue
+					
+					l1 :
+					for(--------------------------------)
+					{
+						l2 :
+						for(-----------------------------------)
+						{
+							for(----------------------------------------)
+							{
+								break l1;
+								break l2;
+								break;
+							}
+						}
+					}
+				
+				
+			eg -
+					
+					l1 :
+						for(int i = 0; i < 3; i++ )
+						{
+							for(int j = 0; j < 3; j++ )
+							{
+								if( i == j)
+									break;							// replaced 
+								System.out.println(i +" "+ j);
+							}
+						}
+						
+						
+					
+					break  -
+						1		0
+						2 		0
+						2		1
+						
+						
+					break l1 -
+						no output
+						
+						
+					continue -
+						0		1
+						0		2
+						1		0
+						1		2
+						2		0
+						2		1
+						
+						
+					continue l1 -
+						1		0
+						2  		0
+						2		1
+						
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+do-while VS continue  (dangerous combination)  -
+
+				
+				int x = 10;
+				do
+				{
+					x++;
+					System.out.println(x);
+					
+					if(++x < 5)
+						continue;
+					
+					x++;
+					System.out.println(x);
+				}while(++x < 10);					// continue
+				
+				
+				
+				output -
+						1 
+						4
+						6 
+						8
+						10
