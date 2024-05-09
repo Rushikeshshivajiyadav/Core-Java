@@ -1,0 +1,231 @@
+
+17/3/2024 
+
+JVM  Architecutre  -					2 days 
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+21/3/2024 
+
+Identifiers, Reserved Keywords 
+Data Types , Literals
+
+
+Arrays 
+Arrays Program  - PENDING
+
+
+Variables 
+
+var-args method 
+main method
+Command-line Arguments 
+
+Java Coding Standards -
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+22/3/2024
+operators & assignments -
+
+
+23/3/2024	
+flow control -
+
+
+24/3/2024 
+Declarations and Access Modifiers -
+
+25/03/2024 -
+interface and abstract class loophools 
+
+26/03/2024 -
+Oops concept -
+	- data hiding
+	- inheritance , IS-A relatuioship
+	- inheritance , HAS-A relatuioship
+	- Method Overloading
+	- Method Overriding 
+	- Access modifiers
+	- var-args method
+	
+
+27/03/2024  -
+Oops concept
+	- coupling
+	- Cohesion
+	- Type Casting
+	- static control flow - (parent to child)
+	- instance control flow - (parent to child)
+	- create objects in different ways
+	- constructors 
+	- default constructor 
+	- super, this 
+	- Overloaded constructors
+	- singalton class 
+	
+	
+28/03/2024
+Exception Handling 
+	- Exception handling
+	- Runtime stack mechanism
+	- Default exception handling
+	- Exception Hirerchy
+	- Checked Exception VS UnChecked Exception 
+	- Fully Checked VS Partially Checked
+	- Customized exception handling using try-catch
+	- try with multiple catch block
+	- final, finally, finalize
+	- various possible combination of try-catch-finally
+	- throw
+	- throws
+	- Exception handling keywords summary
+	- Customized are User-Defined Exception
+	- top 10 exceptions
+	- 1.7 version enhancements
+		- try with resources
+		- multi-catch block
+		
+		
+		
+
+29/03/2024
+MultiThreading 
+	- Introduction
+	- The ways to define a Thread 
+			1) by extending Thread class
+			2) by implementing Runnable interface
+	- getting & setting Name of Thread
+	- Thread Priorities
+	- the methods to prevent Thread execution
+			1) yield()
+			2) join()
+			3) sleep()
+			
+			
+1/04/2024
+
+	- Synchronization 
+	- InterThread communication 
+	- DeadLock
+	- Deamon Threads
+	
+	
+	- MultiThreading Enhancements 
+		- ThreadGroup 
+		- java.unil.concurrent package
+		- Lock (I)  
+		- ReenntrantLock(c) 
+		- Thread Pools (Executor Framework)
+		- Callable and Future
+		- Difference between Runnable and Callable
+		- ThreadLocal
+		- InheritableThreadLocal 
+		
+		
+		
+3/04/2024
+	
+	- Innerclass
+	- Types of Innerclass
+		1) normal or regular inner classes
+		2) method local inner classes 
+		3) Annonymous inner classes
+				1) Annonymous Inner class that extends a class
+				2) Annonymous Inner class that implements an interface
+				3) Annonymous Inner class that defined inside Arguments
+		4) static nested classes
+		
+04/04/2024		
+	- normal java class VS Annonymous Inner class
+	- static nested classes
+	- Differences between normal or regular inner class VS static Nested classes
+	- Various combinations of Nested classes and interface
+			1) class inside a class
+			2) interface inside a class
+			3) interface inside interface
+			4) class inside interface
+			
+		
+05/04/2024	
+	- java.lang.package
+	
+			1) Introduction 
+			2) Object class  -
+					- toString()
+					- hashCode()
+					- toString()  VS hashCode() 
+					- getClass() 
+					- finalize()
+					- wait(), notify(), notifyAll() 
+					
+			3) String class 
+					- constructor of String Class
+					- Important methods of String Class
+					- final VS immutability  
+					
+			4) StringBuffer -
+					- Constructor 
+					- Important methods of StringBuffer
+
+06/04/2024					 
+			5) StringBuiler
+			6) Wrapper classes -
+					- constructors
+					- utilities methods
+					- partial Hierarchy of lang package
+					
+			7) Autoboxing & Autounboxing
+					- Autoboxing
+					- Autounboxing
+	
+07/04/2024
+			8) Overloading wrt Autoboxing, Widening and varargs method  
+			9) Relational between == operator and .equals() method 
+			10) Contract between .equals() method and hashCode() method
+			11) clone() method
+					- Shallow Cloning
+					- Deep Cloning
+					
+			12) String Class
+
+
+
+08/04/2024
+
+	- File 
+			- File class constructors
+			- important methods present in File class
+			
+	- FileWriter 
+			- Constructors 
+			- important method of FileWriter
+			
+	- FileReader 
+			- Constructors 
+			- important method of FileReader
+			
+	- BufferedWriter 
+			- constructors
+			- methods 
+			
+	- BufferedReader
+			- constructors
+			- methods 
+			
+	- PrintWriter 
+			- constructors
+			- methods 
+			
+			
+	
+09/04/2024
+	
+	- Serialization 
+
+
+
+
